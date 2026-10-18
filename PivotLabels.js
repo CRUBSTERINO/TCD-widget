@@ -17,7 +17,7 @@ const PivotLabels = (function() {
                 if (!document.getElementById('sum-value-label')) {
                     const sumLabel = document.createElement('span');
                     sumLabel.id = 'sum-value-label';
-                    sumLabel.textContent = 'Valeur Σ';
+                    sumLabel.textContent = 'Значення Σ';
                     sumLabel.style.fontWeight = '600';
                     sumLabel.style.marginRight = '8px';
                     sumLabel.style.color = 'var(--primary-color)';
@@ -42,7 +42,7 @@ const PivotLabels = (function() {
                     if (nextElement && nextElement.tagName === 'SELECT' && !document.getElementById('sum-value-label')) {
                         const sumLabel = document.createElement('span');
                         sumLabel.id = 'sum-value-label';
-                        sumLabel.textContent = 'Valeur Σ';
+                        sumLabel.textContent = 'Значення Σ';
                         sumLabel.style.fontWeight = '600';
                         sumLabel.style.marginRight = '8px';
                         sumLabel.style.color = 'var(--primary-color)';
@@ -67,7 +67,7 @@ const PivotLabels = (function() {
             
             const rowsLabel = document.createElement('div');
             rowsLabel.id = 'rows-label';
-            rowsLabel.textContent = 'Lignes';
+            rowsLabel.textContent = 'Рядки';
             rowsLabel.style.fontWeight = '600';
             rowsLabel.style.color = 'var(--primary-color)';
             rowsLabel.style.padding = '5px 0';
@@ -122,7 +122,7 @@ const PivotLabels = (function() {
             
             const colsLabel = document.createElement('div');
             colsLabel.id = 'cols-label';
-            colsLabel.textContent = 'Colonnes';
+            colsLabel.textContent = 'Стовпці';
             colsLabel.style.fontWeight = '600';
             colsLabel.style.color = 'var(--primary-color)';
             colsLabel.style.padding = '3px 8px';
@@ -210,10 +210,10 @@ const PivotLabels = (function() {
             });
         }
         
-        // 2. Lors de la sortie du mode plein écran
-        const fullscreenExitButton = document.getElementById('fullscreen-exit-button');
-        if (fullscreenExitButton) {
-            fullscreenExitButton.addEventListener('click', () => {
+        // 2. Lors du passage en mode édition
+        const editModeButton = document.getElementById('edit-mode-button');
+        if (editModeButton) {
+            editModeButton.addEventListener('click', () => {
                 setTimeout(addPivotTableLabels, 200);
             });
         }
@@ -253,16 +253,19 @@ const PivotLabels = (function() {
         });
     }
 
-    // Fonction d'initialisation principale
+    let listenersInitialized = false;
+
+    // Fonction d'initialisation principale (peut être appelée à chaque rendu du tableau)
     function initializePivotTableLabels() {
         // Essayer d'ajouter les étiquettes immédiatement
         addPivotTableLabels();
-        
-        // Configurer l'observateur pour les changements futurs
-        setupLabelsObserver();
-        
-        // Configurer les écouteurs d'événements
-        setupInteractionListeners();
+
+        // Observateurs et écouteurs installés une seule fois, sinon ils s'accumulent à chaque rendu
+        if (!listenersInitialized) {
+            setupLabelsObserver();
+            setupInteractionListeners();
+            listenersInitialized = true;
+        }
         
         // Vérifier à nouveau après un court délai pour s'assurer que tout est bien en place
         setTimeout(addPivotTableLabels, 500);

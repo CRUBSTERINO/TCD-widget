@@ -167,51 +167,49 @@ body.fullscreen-active {
   overflow: hidden; 
 }
 
-/* --- BOUTON POUR QUITTER LE MODE PLEIN ÉCRAN --- */
-#fullscreen-exit-button {
+/* --- BOUTON DISCRET POUR PASSER EN MODE ÉDITION --- */
+#edit-mode-button {
   position: fixed;
-  bottom: 15px;
-  left: 15px;
+  bottom: 6px;
+  left: 6px;
   z-index: 2002;
-  background-color: rgba(99, 102, 241, 0.75);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  padding: 0;
+  width: 24px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  background-color: transparent !important;
+  color: var(--primary-light) !important;
+  opacity: 0.3;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-#fullscreen-exit-button:hover {
-  background-color: var(--primary-color);
-  transform: scale(1.1);
-}
-#fullscreen-exit-button svg {
-  fill: white !important;
-  width: 20px !important;
-  height: 20px !important;
+  box-shadow: none !important;
   transform: none !important;
-  min-width: 20px !important;
-  min-height: 20px !important;
-  display: block !important;
+  transition: opacity 0.2s ease, background-color 0.2s ease !important;
+}
+#edit-mode-button:hover,
+#edit-mode-button:focus-visible {
+  opacity: 1;
+  background-color: var(--hover-light) !important;
+}
+#edit-mode-button svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  display: block;
 }
 
-#fullscreen-exit-button path {
-  fill: white !important;
-  d: path("M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z") !important;
-  transform: none !important;
-}
-
-body:not(.fullscreen-active) #fullscreen-exit-button {
+body:not(.fullscreen-active) #edit-mode-button {
   display: none;
 }
-body.fullscreen-active #fullscreen-exit-button {
-  display: flex;
+
+/* Utilisateurs sans droit de modification : uniquement le tableau, sans constructeur ni contrôles */
+body.read-only #controls-container,
+body.read-only #edit-mode-button,
+body.read-only #table {
+  display: none !important;
 }
 
 /* --- STYLES POUR LES SÉLECTEURS ET CONTRÔLES --- */
@@ -539,15 +537,9 @@ table.pvtTable .pvtVal {
       background-color: var(--background-dark); 
   }
   
-  #fullscreen-exit-button {
-      background-color: rgba(129, 140, 248, 0.75);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-  #fullscreen-exit-button:hover {
-      background-color: var(--primary-light);
-  }
-  #fullscreen-exit-button svg {
-      fill: var(--text-light);
+  #edit-mode-button:hover,
+  #edit-mode-button:focus-visible {
+      background-color: var(--hover-dark) !important;
   }
   
   #table {

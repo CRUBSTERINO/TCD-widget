@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="uk">
   <head>
     <meta charset="utf-8">
-    <title>PivotTable</title>
+    <title>Зведена таблиця</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://docs.getgrist.com/grist-plugin-api.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -12,8 +12,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/pivot.fr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.23.0/export_renderers.min.js"></script>
+    <script src="pivot.uk.js"></script>
   </head>
   <body>
 
@@ -21,34 +21,34 @@
       <!-- Add a view selector with ten mode to select column and font size        -->
       <div id="controls-container">
           <div class="control-group">
-              <label for="view-mode-select">Vue :</label>
+              <label for="view-mode-select">Режим:</label>
               <select id="view-mode-select">
-                  <option value="pivot">Vue Tableau Croisé Dynamique</option>
-                  <option value="fullscreen">Vue Tableau plein écran</option>
+                  <option value="pivot">Конструктор зведеної таблиці</option>
+                  <option value="fullscreen">Таблиця на весь екран</option>
               </select>
           </div>
           
           <div class="control-group">
-              <label for="column-size-select">Taille colonnes :</label>
+              <label for="column-size-select">Розмір стовпців:</label>
               <select id="column-size-select">
-                  <option value="1.0">1.0x - Normal</option>
-                  <option value="0.9">0.9x - Légèrement réduit</option>
-                  <option value="0.8">0.8x - Compact</option>
-                  <option value="0.7">0.7x - Très compact</option>
-                  <option value="0.6">0.6x - Ultra compact</option>
-                  <option value="0.5">0.5x - Minimal</option>
-                  <option value="0.4">0.4x - Micro</option>
-                  <option value="0.35">0.35x - Nano</option>
-                  <option value="0.3">0.3x - Pico</option>
-                  <option value="0.25">0.25x - Extrême</option>
+                  <option value="1.0">1.0x - Звичайний</option>
+                  <option value="0.9">0.9x - Трохи зменшений</option>
+                  <option value="0.8">0.8x - Компактний</option>
+                  <option value="0.7">0.7x - Дуже компактний</option>
+                  <option value="0.6">0.6x - Ультракомпактний</option>
+                  <option value="0.5">0.5x - Мінімальний</option>
+                  <option value="0.4">0.4x - Мікро</option>
+                  <option value="0.35">0.35x - Нано</option>
+                  <option value="0.3">0.3x - Піко</option>
+                  <option value="0.25">0.25x - Екстремальний</option>
               </select>
           </div>
       </div>
   
-    <!-- exit full screen -->
-    <button id="fullscreen-exit-button" title="Quitter le mode plein écran">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+    <!-- discreet switch to edit mode (editors only) -->
+    <button id="edit-mode-button" title="Редагувати зведену таблицю" aria-label="Редагувати зведену таблицю">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
       </svg>
     </button>
   
